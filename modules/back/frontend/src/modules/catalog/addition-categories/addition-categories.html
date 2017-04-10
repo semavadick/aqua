@@ -1,0 +1,26 @@
+<div class="panel panel-white" style="position: relative;">
+    <panel-spinner [isVisible]="manager.isLoading"></panel-spinner>
+
+    <div class="panel-heading">
+        <h5 class="panel-title">Дополнительные</h5>
+    </div>
+
+    <div class="panel-body">
+        <addition-categories-tree
+                [selectOnlyOneCategory]="true"
+                [enableControls]="true"
+                (onSelect)="selectCategories($event)"
+                (onCreate)="createCategory($event)"
+                (onUpdate)="updateCategory($event)"
+                (onDelete)="deleteCategory($event)"
+                [enableSorting]="true"
+                (onSort)="sortCategories($event)"
+        >
+        </addition-categories-tree>
+    </div>
+</div>
+
+<addition-category-details
+        (onSave)="updateCategories()"
+>
+</addition-category-details>

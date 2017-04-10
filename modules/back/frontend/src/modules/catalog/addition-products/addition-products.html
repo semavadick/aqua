@@ -1,0 +1,21 @@
+<my-datatable
+        [manager]="manager"
+        [columns]="columns"
+        [searchForm]="searchForm"
+        [entityForm]="productForm"
+        (formInitialize)="formInitialized()"
+        defaultSortAttribute="sort"
+        title="Список товаров"
+        createButtonText="Добавить товар"
+        deleteMessage="Уверены, что хотите удалить данный товар?"
+        createFormTitle="Добавление товара"
+        updateFormTitle="Редактирование товара"
+>
+    <my-datatable-search-form>
+        <addition-search-form [form]="searchForm"></addition-search-form>
+    </my-datatable-search-form>
+
+    <my-datatable-entity-form>
+        <addition-product-form [form]="productForm"></addition-product-form>
+    </my-datatable-entity-form>
+</my-datatable>

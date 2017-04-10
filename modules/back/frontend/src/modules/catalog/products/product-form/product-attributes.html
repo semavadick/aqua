@@ -1,0 +1,53 @@
+<fieldset class="content-group">
+    <legend class="text-bold">
+        Характеристики
+
+        <button (click)="addAttribute()" class="btn btn-xs bg-teal-400 btn-labeled btn-rounded" type="button" style="margin-left: 20px;">
+            <b><i class="icon-plus22"></i></b>
+            Добавить характеристику
+        </button>
+    </legend>
+
+    <my-grid [cols]="2">
+        <div *ngFor="let attribute of attributes">
+            <div class="product-attribute">
+              <div class="row">
+                <div class="col-md-8">
+                  Характеристика продукта:
+                </div>
+                <div class="col-md-4">
+                  <button (click)="deleteAttribute(attribute)" class="pull-right btn text-warning-700 btn-xs btn-link" type="button">
+                    <b><i class="icon-trash"></i></b>
+                  </button>
+                </div>
+              </div>
+
+
+                <i18n-tabs [entityForm]="attribute">
+                    <div *ngFor="let i18nForm of attribute.getI18ns()">
+
+                        <form-group [form]="i18nForm" attribute="text" label="Название" [horizontal]="false">
+                            <input [(ngModel)]="i18nForm.name" type="text" class="form-control" />
+                        </form-group>
+
+                        <form-group [form]="i18nForm" attribute="text" label="Значение" [horizontal]="false">
+                            <input [(ngModel)]="i18nForm.value" type="text" class="form-control" />
+                        </form-group>
+
+                    </div>
+                </i18n-tabs>
+            </div>
+        </div>
+    </my-grid>
+</fieldset>
+
+<style>
+    .product-attribute {
+        display: block;
+        padding: 15px;
+        border: 1px solid #ccc;
+    }
+    .product-attribute .btn {
+        margin-bottom: 15px;
+    }
+</style>

@@ -1,0 +1,84 @@
+<div class="panel panel-white" style="position: relative;">
+    <panel-spinner [isVisible]="manager.isLoading"></panel-spinner>
+
+    <div class="panel-heading">
+        <h5 class="panel-title">Вопросы и ответы</h5>
+        <div class="heading-elements">
+            <button (click)="createItem()" type="button" class="btn btn-xs bg-teal-400 btn-labeled btn-rounded">
+                <b><i class="icon-plus22"></i></b>
+                Добавить вопрос
+            </button>
+        </div>
+    </div>
+
+    <div class="panel-body">
+        <div class="panel-group content-group-lg">
+
+            <div *ngFor="let item of manager.items" class="panel panel-white">
+                <div class="panel-heading">
+                    <h6 class="panel-title">
+                        <a (click)="toggleActiveItem(item)" [class.collapsed]="!itemIsActive(item)">
+                            {{ item.question }}
+                        </a>
+                    </h6>
+
+                    <div class="heading-elements">
+                        <button (click)="updateItem(item)" title="Редактировать" type="button" class="btn bg-info-600 btn-icon">
+                            <i class="icon-pen"></i>
+                        </button>
+                        <button (click)="deleteItem(item)" title="Удалить" type="button" class="btn bg-warning-700 btn-icon" style="margin-left: 10px;">
+                            <i class="icon-trash"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div [class.in]="itemIsActive(item)" class="panel-collapse collapse" aria-expanded="true">
+                    <div [innerHTML]="item.answer" class="panel-body"></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<my-modal>
+
+    <panel-spinner [isVisible]="form.isLoading"></panel-spinner>
+
+    <form class="form-horizontal" (submit)="save()">
+
+        <i18n-tabs>
+            <div *ngFor="let i18nForm of form.getI18ns()">
+
+                <i18n-checkbox [form]="i18nForm"></i18n-checkbox>
+
+                <form-group [form]="i18nForm" [attribute]="'question'" [label]="'Вопрос'" [horizontal]="false">
+                    <input [(ngModel)]="i18nForm.question" type="text" class="form-control" />
+                </form-group>
+
+                <form-group [form]="i18nForm" attribute="answer" label="Ответ" [horizontal]="false">
+                    <my-wysiwyg [(value)]="i18nForm.answer"></my-wysiwyg>
+                </form-group>
+
+            </div>
+        </i18n-tabs>
+
+        <form-button>Сохранить</form-button>
+
+    </form>
+
+</my-modal>
+
+<style>
+    .panel-collapse {
+        max-height: 0;
+        transition: max-height, 0.3s;
+        display: block;
+        overflow: hidden;
+        box-sizing: border-box;
+    }
+    .panel-collapse.in {
+        max-height: 300px;
+        overflow: visible;
+    }
+</style>

@@ -1,0 +1,63 @@
+<fieldset class="content-group">
+    <legend class="text-bold">
+        Опции
+
+        <button (click)="addOption()" class="btn btn-xs bg-teal-400 btn-labeled btn-rounded" type="button" style="margin-left: 20px;">
+            <b><i class="icon-plus22"></i></b>
+            Добавить опцию
+        </button>
+    </legend>
+
+    <my-grid [cols]="2">
+        <div *ngFor="let option of options">
+            <div class="product-option">
+              <div class="row">
+                <div class="col-md-8">
+                  Опция конфигурации товара
+                </div>
+                <div class="col-md-4">
+                  <button (click)="deleteOption(option)" class="pull-right btn text-warning-700 btn-xs btn-link" type="button">
+                    <b><i class="icon-trash"></i></b>
+                  </button>
+                </div>
+              </div>
+                <i18n-tabs [entityForm]="option">
+                    <div *ngFor="let i18nForm of option.getI18ns()">
+                        <form-group [form]="option" attribute="type" label="Тип опции" [horizontal]="false">
+                            <select #selectOption (change)="changeOptionType(option, $event.target.value)" name="type" class="form-control">
+                                <option disabled value="">Выбор типа</option>
+                                <option value="4" [selected]="option.type == 4">Диаметр (Размер изделия)</option>
+                                <option value="3" [selected]="option.type == 3">Ширина (размер изделия)</option>
+                                <option value="5" [selected]="option.type == 5">Длина (размер изделия)</option>
+                                <option value="2" [selected]="option.type == 2">Глубина (размер изделия)</option>
+                                <option value="1" [selected]="option.type == 1">Оборудование</option>
+                            </select>
+                        </form-group>
+                        <form-group *ngIf="option.show_default" [form]="option" attribute="main" [horizontal]="false">
+                            <my-checkbox [selected]="option.main == 1" class="is-default-checkbox"  (change)="changeMain(option, $event.target.value)" label="По умолчанию" [(value)]="option.main"></my-checkbox>
+                        </form-group>
+                        <form-group [form]="i18nForm" attribute="text" label="Название" [horizontal]="false">
+                            <input [(ngModel)]="i18nForm.name" type="text" class="form-control" />
+                        </form-group>
+
+                        <form-group [form]="i18nForm" attribute="text" label="Стоимость" [horizontal]="false">
+                            <input [(ngModel)]="i18nForm.value" type="text" class="form-control" />
+                        </form-group>
+
+                    </div>
+                </i18n-tabs>
+            </div>
+        </div>
+    </my-grid>
+</fieldset>
+
+<style>
+    .product-option {
+        display: block;
+        padding: 15px;
+        border: 1px solid #ccc;
+    }
+    .product-option .btn {
+        margin-bottom: 15px
+    }
+</style>

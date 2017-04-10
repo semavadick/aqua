@@ -1,0 +1,32 @@
+<crud-grid
+        [manager]="manager"
+        [sortable]="true"
+        [form]="form"
+        [i18nTabs]="i18nTabs"
+        title="Список сертификатов"
+        createButtonText="Добавить сертификат"
+        deleteMessage="Вы уверены, что хотите удалить данный сертификат?"
+        createFormTitle="Добавление сертификата"
+        updateFormTitle="Редактирование сертификата"
+>
+    
+    <form-group [form]="form" attribute="image" label="Изображение">
+        <my-cropper
+                [image]="form.image"
+                [aspectRatio]="258/362"
+        ></my-cropper>
+    </form-group>
+
+    <i18n-tabs>
+        <div *ngFor="let i18nForm of form.getI18ns()">
+
+            <i18n-checkbox [form]="i18nForm"></i18n-checkbox>
+
+            <form-group [form]="i18nForm" [attribute]="'name'" [label]="'Название'" [horizontal]="false">
+                <input [(ngModel)]="i18nForm.name" type="text" class="form-control" />
+            </form-group>
+
+        </div>
+    </i18n-tabs>
+
+</crud-grid>

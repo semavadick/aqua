@@ -1,0 +1,85 @@
+<form-group [form]="form" attribute="preview" label="Превью">
+    <my-cropper
+            [image]="form.preview"
+    ></my-cropper>
+</form-group>
+
+<form-group [form]="form" attribute="sku" label="SKU">
+    <input [(ngModel)]="form.sku" type="text" class="form-control" />
+</form-group>
+
+<form-group [form]="form" attribute="price" label="Цена">
+    <input [(ngModel)]="form.price" type="text" class="form-control" />
+</form-group>
+
+<form-group [form]="form" attribute="isOnOffer" [horizontal]="false">
+    <my-checkbox label="В продаже" [(value)]="form.isOnOffer"></my-checkbox>
+</form-group>
+
+<product-images [images]="form.images"></product-images>
+
+<product-attributes [attributes]="form.attributes"></product-attributes>
+
+<related-products [form]="form"></related-products>
+
+<form-group [form]="form" attribute="filtersIds" label="Фильтры">
+    <multi-select [(value)]="form.filtersIds" [items]="form.filters"></multi-select>
+</form-group>
+
+<form-group [form]="form" attribute="attachmentsIds" label="Принадлежность">
+    <multi-select [(value)]="form.attachmentsIds" [items]="form.attachments"></multi-select>
+</form-group>
+
+
+<form-group [form]="form" attribute="figure" label="Ссылка на 3D-модель Sketchfab">
+    <textarea [(ngModel)]="form.figure" class="form-control"></textarea>
+</form-group>
+
+<form-group [form]="form" attribute="circuit" label="Схема">
+    <file-uploader
+            [file]="form.circuit"
+            [deleteAllowed]="true"
+    ></file-uploader>
+</form-group>
+
+<form-group [form]="form" attribute="certificate" label="Паспорт">
+    <file-uploader
+            [file]="form.certificate"
+            [deleteAllowed]="true"
+    ></file-uploader>
+</form-group>
+
+<form-group [form]="form" attribute="draft" label="Чертёж">
+    <file-uploader
+            [file]="form.draft"
+            [deleteAllowed]="true"
+    ></file-uploader>
+</form-group>
+
+<i18n-tabs>
+    <div *ngFor="let i18nForm of form.getI18ns()">
+
+        <i18n-checkbox [form]="i18nForm"></i18n-checkbox>
+
+        <form-group [form]="i18nForm" attribute="name" label="Название" [horizontal]="false">
+            <input [(ngModel)]="i18nForm.name" type="text" class="form-control" />
+        </form-group>
+
+        <form-group [form]="i18nForm" attribute="description" label="Описание" [horizontal]="false">
+            <my-wysiwyg [(value)]="i18nForm.description"></my-wysiwyg>
+        </form-group>
+
+        <form-group [form]="i18nForm" attribute="pageTitle" label="Title страницы" [horizontal]="false">
+            <input [(ngModel)]="i18nForm.pageTitle" type="text" class="form-control" />
+        </form-group>
+
+        <form-group [form]="i18nForm" attribute="pageMetaKeywords" label="Meta-keywords страницы" [horizontal]="false">
+            <input [(ngModel)]="i18nForm.pageMetaKeywords" type="text" class="form-control" />
+        </form-group>
+
+        <form-group [form]="i18nForm" attribute="pageMetaDescription" label="Meta-description страницы" [horizontal]="false">
+            <textarea [(ngModel)]="i18nForm.pageMetaDescription" class="form-control"></textarea>
+        </form-group>
+
+    </div>
+</i18n-tabs>

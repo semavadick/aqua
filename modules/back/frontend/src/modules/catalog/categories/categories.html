@@ -1,0 +1,26 @@
+<div class="panel panel-white" style="position: relative;">
+    <panel-spinner [isVisible]="manager.isLoading"></panel-spinner>
+
+    <div class="panel-heading">
+        <h5 class="panel-title">Категории</h5>
+    </div>
+
+    <div class="panel-body">
+        <categories-tree
+                [selectOnlyOneCategory]="true"
+                [enableControls]="true"
+                (onSelect)="selectCategories($event)"
+                (onCreate)="createCategory($event)"
+                (onUpdate)="updateCategory($event)"
+                (onDelete)="deleteCategory($event)"
+                [enableSorting]="true"
+                (onSort)="sortCategories($event)"
+        >
+        </categories-tree>
+    </div>
+</div>
+
+<category-details
+        (onSave)="updateCategories()"
+>
+</category-details>

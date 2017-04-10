@@ -1,0 +1,7 @@
+<div class="form-group" [class.has-error]="form.hasError(attribute)">
+    <label *ngIf="label" class="control-label col-lg-2" [class.col-lg-2]="horizontal">{{ label }}</label>
+    <div [class.col-lg-10]="horizontal">
+        <ng-content></ng-content>
+        <span *ngIf="form.hasError(attribute)" class="help-block">{{ form.getError(attribute) }}</span>
+    </div>
+</div>

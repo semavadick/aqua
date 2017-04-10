@@ -1,0 +1,164 @@
+<div class="form-group">
+    <div class="col-lg-2">
+        Имя клиента
+    </div>
+    <div class="col-lg-10">
+        {{ form.clientFullName }}
+    </div>
+</div>
+<div class="form-group">
+    <div class="col-lg-2">
+        E-mail клиента
+    </div>
+    <div class="col-lg-10">
+        {{ form.clientEmail }}
+    </div>
+</div>
+<div class="form-group">
+    <div class="col-lg-2">
+        Телефон клиента
+    </div>
+    <div class="col-lg-10">
+        {{ form.clientPhone }}
+    </div>
+</div>
+<div class="form-group">
+    <div class="col-lg-2">
+        Дата заказа
+    </div>
+    <div class="col-lg-10">
+        {{ form.added }}
+    </div>
+</div>
+
+<fieldset *ngIf="form.orderProducts.length > 0 || form.orderAdditionProducts.length > 0" class="content-group">
+    <legend class="text-bold">
+        Список товаров
+    </legend>
+
+    <div *ngIf="form.orderProducts.length > 0" class="datatable-scroll">
+        <table class="table datatable-save-state dataTable no-footer">
+            <thead>
+            <tr>
+                <th>
+                    SKU
+                </th>
+                <th>
+                    Название
+                </th>
+                <th>
+                    Цена
+                </th>
+                <th style="width: 100px;">
+                    Кол-во
+                </th>
+                <th style="width: 50px;"></th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr *ngFor="let product of form.orderProducts">
+                <td>
+                    {{ product.sku }}
+                </td>
+                <td>
+                    {{ product.name }}
+                </td>
+                <td>
+                    {{ product.getTotalPrice() }}
+                    <div *ngIf="product.discount > 0">
+                        (со скидкой {{product.discount}}%)
+                    </div>
+                </td>
+                <td>
+                    <input [(ngModel)]="product.quantity" type="text" class="form-control" />
+                </td>
+                <td class="text-center" style="width: 50px;">
+                    <button (click)="deleteProduct(product)" title="Удалить" type="button" class="btn btn-xs bg-warning-700 btn-icon" style="margin-left: 10px;">
+                        <i class="icon-trash"></i>
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div *ngIf="form.orderAdditionProducts.length > 0"  class="datatable-scroll">
+        <table class="table datatable-save-state dataTable no-footer">
+            <thead>
+            <tr>
+                <th>
+                    SKU
+                </th>
+                <th>
+                    Название
+                </th>
+                <th>
+                    Опции
+                </th>
+                <th>
+                    Цена
+                </th>
+                <th style="width: 100px;">
+                    Кол-во
+                </th>
+                <th style="width: 50px;"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let additionProduct of form.orderAdditionProducts">
+                <td>
+                    {{ additionProduct.sku }}
+                </td>
+                <td>
+                    {{ additionProduct.name }}
+                </td>
+                <td>
+                    <div *ngFor="let additionProductOption of additionProduct.options">
+                        <div>
+                            <span *ngIf="additionProductOption.type != 1">({{form.typeHeaders[additionProductOption.type]}})</span>
+                            <span class="product-option-name">{{ additionProductOption.name }}</span>
+                            <span *ngIf="additionProductOption.main != 1" class="product-option-value"> + {{ additionProductOption.value }}</span>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    {{ additionProduct.getTotalPrice() }}
+                    <div *ngIf="additionProduct.discount > 0">
+                        (со скидкой {{additionProduct.discount}}%)
+                    </div>
+                </td>
+                <td>
+                    <input [(ngModel)]="additionProduct.quantity" type="text" class="form-control" />
+                </td>
+                <td class="text-center" style="width: 50px;">
+                    <button (click)="deleteAdditionProduct(additionProduct)" title="Удалить" type="button" class="btn btn-xs bg-warning-700 btn-icon" style="margin-left: 10px;">
+                        <i class="icon-trash"></i>
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</fieldset>
+
+<form-group [form]="form" attribute="discount" label="Скидка">
+    <input [(ngModel)]="form.discount" type="text" class="form-control" />
+</form-group>
+
+<form-group [form]="form" attribute="status" label="Статус">
+    <select [ngModel]="form.status" (ngModelChange)="form.status = $event" class="form-control">
+        <option *ngFor="let status of form.getStatuses()" [value]="status.id">
+            {{ status.label }}
+        </option>
+    </select>
+</form-group>
+
+<div class="form-group">
+    <div class="col-lg-2">
+        Общая стоимость
+    </div>
+    <div class="col-lg-10" style="font-size: 20px;">
+        {{ form.getTotalCost() }} руб.
+    </div>
+</div>
+

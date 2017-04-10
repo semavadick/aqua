@@ -1,0 +1,84 @@
+<crud-grid
+        [manager]="manager"
+        [form]="form"
+        [i18nTabs]="i18nTabs"
+        title="Типы бассейнов"
+        createButtonText="Добавить тип"
+        deleteMessage="Вы уверены, что хотите удалить данный тип?"
+        createFormTitle="Добавление типа"
+        updateFormTitle="Редактирование типа"
+>
+    
+    <form-group [form]="form" attribute="preview" label="Превью">
+        <my-cropper
+                [image]="form.preview"
+                [aspectRatio]="440/234"
+        ></my-cropper>
+    </form-group>
+
+    <form-group [form]="form" attribute="widePreview" label="Широкое превью">
+        <my-cropper
+                [image]="form.widePreview"
+                [aspectRatio]="660/241"
+        ></my-cropper>
+    </form-group>
+
+    <form-group [form]="form" attribute="bg" label="Фоновое изображение">
+        <my-cropper
+                [image]="form.bg"
+                [aspectRatio]="1620/1079"
+        ></my-cropper>
+    </form-group>
+
+    <fieldset class="content-group">
+        <legend class="text-bold">
+            Преимущества
+
+            <button (click)="addAdvantage()" class="btn btn-xs bg-teal-400 btn-labeled btn-rounded" type="button" style="margin-left: 20px;">
+                <b><i class="icon-plus22"></i></b>
+                Добавить преимущество
+            </button>
+        </legend>
+
+        <my-grid [cols]="2">
+            <type-advantage *ngFor="let advantage of form.advantages" [form]="advantage" (onDelete)="deleteAdvantage($event)"></type-advantage>
+        </my-grid>
+    </fieldset>
+
+    <i18n-tabs>
+        <div *ngFor="let i18nForm of form.getI18ns()">
+
+            <i18n-checkbox [form]="i18nForm"></i18n-checkbox>
+
+            <form-group [form]="i18nForm" [attribute]="'name'" [label]="'Название'" [horizontal]="false">
+                <input [(ngModel)]="i18nForm.name" type="text" class="form-control" />
+            </form-group>
+
+            <form-group [form]="i18nForm" attribute="description" label="Описание" [horizontal]="false">
+                <my-wysiwyg [(value)]="i18nForm.description"></my-wysiwyg>
+            </form-group>
+
+            <form-group [form]="i18nForm" [attribute]="'stages'" [label]="'Этапы строительства'" [horizontal]="false">
+                <file-uploader [file]="i18nForm.stages"></file-uploader>
+            </form-group>
+
+            <!--<form-group [form]="i18nForm" [attribute]="'slug'" [label]="'ЧПУ'" [horizontal]="false">
+                <input [(ngModel)]="i18nForm.slug" type="text" class="form-control" />
+            </form-group>-->
+
+            <form-group [form]="i18nForm" [attribute]="'pageTitle'" [label]="'Title страницы'" [horizontal]="false">
+                <input [(ngModel)]="i18nForm.pageTitle" type="text" class="form-control" />
+            </form-group>
+
+            <form-group [form]="i18nForm" [attribute]="'pageMetaKeywords'" [label]="'Meta-keywords страницы'" [horizontal]="false">
+                <input [(ngModel)]="i18nForm.pageMetaKeywords" type="text" class="form-control" />
+            </form-group>
+
+            <form-group [form]="i18nForm" [attribute]="'pageMetaDescription'" [label]="'Meta-description страницы'" [horizontal]="false">
+                <textarea [(ngModel)]="i18nForm.pageMetaDescription" class="form-control"></textarea>
+            </form-group>
+
+        </div>
+    </i18n-tabs>
+
+</crud-grid>

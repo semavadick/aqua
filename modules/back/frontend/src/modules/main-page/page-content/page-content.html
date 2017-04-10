@@ -1,0 +1,35 @@
+<form-panel
+        [form]="form"
+        [i18nTabs]="i18nTabs"
+        title="Общая информация"
+>
+    <i18n-tabs>
+        <div *ngFor="let i18nForm of form.getI18ns()">
+
+            <form-group [form]="i18nForm" attribute="catalogImage" label="Изображение каталога" [horizontal]="false">
+                <my-cropper
+                        [image]="i18nForm.catalogImage"
+                        [aspectRatio]="277/201"
+                ></my-cropper>
+            </form-group>
+
+            <form-group [form]="i18nForm" attribute="catalogFile" label="Файл каталога" [horizontal]="false">
+                <file-uploader [file]="i18nForm.catalogFile"></file-uploader>
+            </form-group>
+
+            <form-group [form]="i18nForm" [attribute]="'title'" [label]="'Title'" [horizontal]="false">
+                <input [(ngModel)]="i18nForm.title" type="text" class="form-control" />
+            </form-group>
+
+            <form-group [form]="i18nForm" [attribute]="'metaKeywords'" [label]="'Meta-keywords'" [horizontal]="false">
+                <input [(ngModel)]="i18nForm.metaKeywords" type="text" class="form-control" />
+            </form-group>
+
+            <form-group [form]="i18nForm" [attribute]="'metaDescription'" [label]="'Meta-description'" [horizontal]="false">
+                <textarea [(ngModel)]="i18nForm.metaDescription" class="form-control"></textarea>
+            </form-group>
+
+        </div>
+    </i18n-tabs>
+
+</form-panel>

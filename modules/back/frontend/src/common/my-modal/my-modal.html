@@ -1,0 +1,67 @@
+<div class="my-modal" [class.my-modal--opened]="opened">
+    <div class="my-modal__inner">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" (click)="close()">&times;</button>
+                <h5 class="modal-title">{{ title }}</h5>
+            </div>
+            <div class="modal-body">
+                <ng-content></ng-content>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .my-modal {
+        position: fixed;
+        display: block;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        z-index: 60000;
+        overflow: auto;
+        text-align: center;
+        font-size: 0;
+        line-height: 0;
+        letter-spacing: -1px;
+        white-space: nowrap;
+
+        visibility: hidden;
+        opacity: 0;
+        transition: all 0.5s;
+        background:rgba(0,0,0,0.85);
+    }
+    .my-modal--opened {
+        visibility: visible;
+        opacity: 1;
+    }
+    .my-modal::after {
+        content: "";
+        height: 100%;
+        display: inline-block;
+        vertical-align: middle;
+    }
+    .my-modal__inner {
+        display: inline-block;
+        vertical-align: middle;
+        width: 90%;
+        position: relative;
+        font-size: 14px;
+        line-height: normal;
+        letter-spacing: normal;
+        white-space: normal;
+        text-align: left;
+        margin: 20px;
+    }
+    .my-modal__inner .modal-content {
+        position: relative;
+    }
+    .my-modal .close {
+        margin-top: -20px;
+        font-size: 40px;
+        color: #ff0000;
+        margin-right: -5px
+    }
+</style>

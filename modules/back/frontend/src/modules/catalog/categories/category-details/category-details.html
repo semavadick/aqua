@@ -1,0 +1,76 @@
+<my-modal>
+
+    <panel-spinner [isVisible]="form.isLoading"></panel-spinner>
+
+    <form class="form-horizontal" (submit)="save()">
+
+        <form-group [form]="form" attribute="image" label="Изображение">
+            <my-cropper
+                    [image]="form.image"
+            ></my-cropper>
+        </form-group>
+
+        <form-group [form]="form" attribute="bg" label="Фоновое изображение">
+            <my-cropper
+                    [image]="form.bg"
+                    [aspectRatio]="1320/432"
+            ></my-cropper>
+        </form-group>
+
+        <form-group [form]="form" attribute="hasDiscount" [horizontal]="false">
+            <my-checkbox label="Особая скидка" [(value)]="form.hasDiscount"></my-checkbox>
+        </form-group>
+
+        <form-group [form]="form" attribute="relatedCategoriesIds" label="Связанные категории">
+            <categories-tree (onSelect)="selectCategories($event)"></categories-tree>
+        </form-group>
+
+        <fieldset class="content-group">
+            <legend class="text-bold">
+                Фильтры
+
+                <button (click)="addFilter()" class="btn btn-xs bg-teal-400 btn-labeled btn-rounded" type="button" style="margin-left: 20px;">
+                    <b><i class="icon-plus22"></i></b>
+                    Добавить фильтр
+                </button>
+            </legend>
+
+            <my-grid [cols]="2">
+                <category-filter *ngFor="let filter of form.filters" [form]="filter" (onDelete)="deleteFilter($event)"></category-filter>
+            </my-grid>
+        </fieldset>
+
+        <i18n-tabs>
+            <div *ngFor="let i18nForm of form.getI18ns()">
+
+                <i18n-checkbox [form]="i18nForm"></i18n-checkbox>
+
+                <form-group [form]="i18nForm" attribute="name" label="Название" [horizontal]="false">
+                    <input [(ngModel)]="i18nForm.name" type="text" class="form-control" />
+                </form-group>
+
+                <form-group [form]="i18nForm" attribute="description" label="Описание" [horizontal]="false">
+                    <my-wysiwyg [(value)]="i18nForm.description"></my-wysiwyg>
+                </form-group>
+
+                <form-group [form]="i18nForm" attribute="pageTitle" label="Title страницы" [horizontal]="false">
+                    <input [(ngModel)]="i18nForm.pageTitle" type="text" class="form-control" />
+                </form-group>
+
+                <form-group [form]="i18nForm" attribute="pageMetaKeywords" label="Meta-keywords страницы" [horizontal]="false">
+                    <input [(ngModel)]="i18nForm.pageMetaKeywords" type="text" class="form-control" />
+                </form-group>
+
+                <form-group [form]="i18nForm" attribute="pageMetaDescription" label="Meta-description страницы" [horizontal]="false">
+                    <textarea [(ngModel)]="i18nForm.pageMetaDescription" class="form-control"></textarea>
+                </form-group>
+
+            </div>
+        </i18n-tabs>
+
+
+        <form-button>Сохранить</form-button>
+
+    </form>
+
+</my-modal>

@@ -1,0 +1,45 @@
+<div class="panel panel-white" style="position: relative;">
+    <panel-spinner [isVisible]="manager.isLoading"></panel-spinner>
+
+    <div class="panel-heading">
+        <h5 class="panel-title">{{ title }}</h5>
+        <div class="heading-elements">
+            <button (click)="createEntity()" type="button" class="btn btn-xs bg-teal-400 btn-labeled btn-rounded">
+                <b><i class="icon-plus22"></i></b>
+                {{ createButtonText }}
+            </button>
+        </div>
+    </div>
+
+    <div class="panel-body">
+
+        <my-grid [sortable]="sortable" [manager]="manager" [items]="manager.entities">
+            <my-thumb
+                    *ngFor="let entity of manager.entities; let i=index"
+                    [attr.data-index]="i"
+                    [imageUrl]="entity.imageUrl"
+                    [content]="entity.content"
+                    [deleteMessage]="deleteMessage"
+                    (onUpdate)="updateEntity(entity)"
+                    (onDelete)="deleteEntity(entity)"
+                    [grayBg]="grayBg"
+            >
+            </my-thumb>
+        </my-grid>
+
+        <my-modal>
+
+            <panel-spinner [isVisible]="form.isLoading"></panel-spinner>
+
+            <form class="form-horizontal" (submit)="save()">
+
+                <ng-content></ng-content>
+
+                <form-button>Сохранить</form-button>
+
+            </form>
+
+        </my-modal>
+
+    </div>
+</div>

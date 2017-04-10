@@ -1,0 +1,78 @@
+<form-panel
+        [form]="form"
+        [i18nTabs]="i18nTabs"
+        [title]="title"
+>
+
+    <form-group *ngIf="form.hasBg()" [form]="form" attribute="bg" label="Фоновое изображение">
+        <my-cropper
+                [image]="form.bg"
+                [aspectRatio]="810/270"
+        ></my-cropper>
+    </form-group>
+
+    <fieldset *ngIf="form.hasTypes()" class="content-group">
+        <legend class="text-bold">
+            Типы изделий
+
+            <button (click)="addType()" class="btn btn-xs bg-teal-400 btn-labeled btn-rounded" type="button" style="margin-left: 20px;">
+                <b><i class="icon-plus22"></i></b>
+                Добавить тип
+            </button>
+        </legend>
+
+        <my-grid [cols]="2">
+            <service-type *ngFor="let type of form.types" [form]="type" (onDelete)="deleteType($event)"></service-type>
+        </my-grid>
+    </fieldset>
+
+    <fieldset class="content-group">
+        <legend class="text-bold">
+            Преимущества
+
+            <button (click)="addAdvantage()" class="btn btn-xs bg-teal-400 btn-labeled btn-rounded" type="button" style="margin-left: 20px;">
+                <b><i class="icon-plus22"></i></b>
+                Добавить преимущество
+            </button>
+        </legend>
+
+        <my-grid [cols]="2">
+            <service-advantage *ngFor="let advantage of form.advantages" [form]="advantage" (onDelete)="deleteAdvantage($event)"></service-advantage>
+        </my-grid>
+    </fieldset>
+
+    <i18n-tabs>
+        <div *ngFor="let i18nForm of form.getI18ns()">
+
+            <form-group [form]="i18nForm" attribute="name" label="Название" [horizontal]="false">
+                <input [(ngModel)]="i18nForm.name" type="text" class="form-control" />
+            </form-group>
+
+            <form-group [form]="i18nForm" attribute="description" label="Описание" [horizontal]="false">
+                <my-wysiwyg [(value)]="i18nForm.description"></my-wysiwyg>
+            </form-group>
+
+            <form-group *ngIf="i18nForm.hasAdditDescription()" [form]="i18nForm" attribute="additDescription" label="Что мы можем сделать для вас" [horizontal]="false">
+                <my-wysiwyg [(value)]="i18nForm.additDescription"></my-wysiwyg>
+            </form-group>
+
+            <form-group *ngIf="i18nForm.hasVideo()" [form]="i18nForm" attribute="video" label="ID видео Youtube" [horizontal]="false">
+                <input type="text" [(ngModel)]="i18nForm.video" class="form-control">
+            </form-group>
+
+            <form-group [form]="i18nForm" attribute="pageTitle" label="Title страницы" [horizontal]="false">
+                <input [(ngModel)]="i18nForm.pageTitle" type="text" class="form-control" />
+            </form-group>
+
+            <form-group [form]="i18nForm" attribute="pageMetaKeywords" label="Meta-keywords страницы" [horizontal]="false">
+                <input [(ngModel)]="i18nForm.pageMetaKeywords" type="text" class="form-control" />
+            </form-group>
+
+            <form-group [form]="i18nForm" attribute="pageMetaDescription" label="Meta-description страницы" [horizontal]="false">
+                <textarea [(ngModel)]="i18nForm.pageMetaDescription" class="form-control"></textarea>
+            </form-group>
+
+        </div>
+    </i18n-tabs>
+
+</form-panel>

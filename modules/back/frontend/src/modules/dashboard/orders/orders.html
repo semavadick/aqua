@@ -1,0 +1,36 @@
+<div class="panel panel-flat">
+    <div class="panel-heading">
+        <h6 class="panel-title">Заказы</h6>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row text-center">
+            <div class="col-md-4">
+                <div class="content-group">
+                    <h5 (click)="goToOrders()" class="text-semibold no-margin text-teal-600" style="cursor: pointer;">
+                        {{ totalOrdersCount }}
+                    </h5>
+                    <span class="text-teal-600 text-size-small">всего</span>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="content-group">
+                    <h5 (click)="goToPreProcessingOrders()" class="text-semibold no-margin text-danger" style="cursor: pointer;">
+                        {{ preProcessingOrdersCount }}
+                    </h5>
+                    <span class="text-danger text-size-small">новые</span>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="content-group">
+                    <h5 (click)="goToProcessingOrders()" class="text-semibold no-margin text-primary" style="cursor: pointer;">
+                        {{ processingOrdersCount }}
+                    </h5>
+                    <span class="text-primary text-size-small">в работе</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

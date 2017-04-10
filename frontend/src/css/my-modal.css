@@ -1,0 +1,195 @@
+/**
+ * Модальное окно
+ */
+.my-modal {
+    display: block;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 100000;
+    text-align: center;
+    font-size: 0;
+    line-height: 0;
+    letter-spacing: -1px;
+    white-space: nowrap;
+    overflow: auto;
+
+    visibility: hidden;
+    opacity: 0;
+    transition: all 0.5s;
+    background: #fff;
+}
+.my-modal--opened {
+    visibility: visible;
+    opacity: 1;
+}
+.my-modal:after {
+    content: "";
+    height: 100%;
+    display: inline-block;
+    vertical-align: middle;
+}
+.my-modal__inner {
+    display: inline-block;
+    vertical-align: middle;
+    max-width: 100%;
+    position: relative;
+    font-size: 18px;
+    line-height: normal;
+    letter-spacing: normal;
+    white-space: normal;
+    text-align: left;
+    padding: 20px 0;
+}
+.my-modal__content {
+    display: block;
+    background: #fff;
+    border: 1px #00aeef solid;
+    overflow: hidden;
+    min-height: 150px;
+    box-sizing: border-box;
+    padding: 76px 70px 77px 78px;
+}
+.my-modal--no-padding .my-modal__content {
+    padding: 0;
+    border: none;
+}
+.my-modal__close {
+    cursor: pointer;
+    position: absolute;
+    top: 37px;
+    right: 16px;
+    width: 27px;
+    margin: 0;
+    text-indent: -9999px;
+    height: 27px;
+    background: url(../images/close-popup.jpg) no-repeat;
+}
+.my-modal__close:hover {
+    opacity: 0.7;
+}
+.modal-header, .my-modal h2 {
+    font-size: 23px;
+    line-height: 26px;
+    padding: 0 0 16px;
+    text-transform: none;
+    color: #464646;
+    letter-spacing: 0.02em;
+    margin: 0 6px 29px 0;
+    display: inline-block;
+    vertical-align: top;
+    border-bottom: 1px #b7b7b7 solid;
+}
+
+.my-modal__content {
+    text-align: center;
+}
+
+/**
+ * Форма для модального окна
+ */
+.modal-form {
+    min-width: 360px;
+    max-width: 100%;
+    text-align: left;
+}
+.modal-form__field {
+    display: block;
+}
+.modal-form__field:last-child {
+    margin-bottom: 0;
+}
+.modal-form__control {
+    background: none;
+    border:none;
+    display: block;
+    border-bottom: 1px #898989 solid;
+    color: #898989;
+    height: 50px;
+    font-size: 18px;
+    line-height: 50px;
+    width: 100%;
+    padding: 0 5px 0 0;
+    box-sizing:border-box;
+}
+.modal-form__control:focus {
+    color: #0082c9;
+    border-bottom: 1px #0082c9 solid;
+}
+.modal-form__error {
+    display: none;
+    color: #D80040;
+    margin-top: 5px;
+}
+.modal-form__field.has-error .modal-form__error {
+    color: #D80040;
+    display: block;
+}
+.modal-form__field.has-error .modal-form__control {
+    border-bottom: 1px #D80040 solid;
+}
+.modal-form__btn__wrap {
+    display: block;
+    text-align: center;
+    padding: 40px 33px 0 0;
+}
+.modal-form__btn {
+    color: #0082c9;
+    font: 26px/26px 'DINPro-Regular', sans-serif;
+    -webkit-box-shadow: inset 0px 0px 0 1px #82c2e5;
+    box-shadow: inset 0px 0px 0 1px #82c2e5;
+    cursor: pointer;
+    min-width: 169px;
+    display: inline-block;
+    vertical-align: top;
+    padding: 7px 30px 12px 30px;
+    margin: 0 0 0 32px;
+    box-sizing: border-box;
+    text-align: center;
+    text-decoration: none;
+    background: none;
+    border: 1px #0082c9 solid;
+    transition: all 0.1s linear;
+}
+.modal-form__btn:hover {
+    color: #fff;
+    box-shadow: none;
+    background: #0082c9;
+}
+.modal-form__success {
+    display: none;
+    text-align: center;
+    font-size: 30px;
+    text-transform: none;
+    color: #464646;
+}
+.modal-form.success * {
+    display: none;
+}
+.modal-form.success .modal-form__success {
+    display: block;
+}
+textarea.modal-form__control {
+    margin-top: 25px;
+    padding: 5px;
+    color: #898989;
+    font-size: 18px;
+    line-height: 20px;
+    height: 133px;
+    width: 100%;
+    resize: none;
+    border: 1px #898989 solid;
+}
+.modal-form__field.has-error textarea.modal-form__control{
+    border: 1px #D80040 solid;
+}
+
+.my-modal div[id *= 'recaptcha-container'] {
+    margin-top: 29px;
+}
+
+.my-modal div[id *= 'recaptcha-container'] > div {
+    margin: 0 auto;
+}

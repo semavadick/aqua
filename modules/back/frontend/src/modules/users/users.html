@@ -1,0 +1,29 @@
+<page-header title="Управление пользователями"></page-header>
+
+<div class="content">
+
+    <my-datatable
+            [manager]="manager"
+            [columns]="columns"
+            [searchForm]="searchForm"
+            [entityForm]="userForm"
+            (formInitialize)="userFormComponent.formInitialized()"
+            defaultSortAttribute="id"
+            title="Список пользователей"
+            createButtonText="Добавить пользователя"
+            deleteMessage="Уверены, что хотите удалить данного пользователя?"
+            createFormTitle="Добавление пользователя"
+            updateFormTitle="Редактирование пользователя"
+    >
+
+        <my-datatable-search-form>
+            <search-form [form]="searchForm"></search-form>
+        </my-datatable-search-form>
+
+        <my-datatable-entity-form>
+            <user-form [form]="userForm"></user-form>
+        </my-datatable-entity-form>
+
+    </my-datatable>
+
+</div>

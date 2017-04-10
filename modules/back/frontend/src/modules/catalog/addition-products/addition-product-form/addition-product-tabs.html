@@ -1,0 +1,42 @@
+<fieldset class="content-group">
+    <legend class="text-bold">
+        Информационные вкладки
+
+        <button (click)="addTab()" class="btn btn-xs bg-teal-400 btn-labeled btn-rounded" type="button" style="margin-left: 20px;">
+            <b><i class="icon-plus22"></i></b>
+            Добавить вкладку
+        </button>
+    </legend>
+
+    <div *ngFor="let tab of tabs">
+            <div class="product-tab">
+                <button (click)="deleteTab(tab)" class="pull-right btn text-warning-700 btn-xs btn-link" type="button">
+                    <b><i class="icon-trash"></i></b>
+                </button>
+
+                <i18n-tabs [entityForm]="tab">
+                    <div *ngFor="let i18nForm of tab.getI18ns()">
+
+                        <form-group [form]="i18nForm" attribute="text" label="Название вкладки" [horizontal]="false">
+                            <input [(ngModel)]="i18nForm.name" type="text" class="form-control" />
+                        </form-group>
+
+                        <form-group [form]="i18nForm" attribute="content" label="Содержимое" [horizontal]="false">
+                            <my-wysiwyg [(value)]="i18nForm.content"></my-wysiwyg>
+                        </form-group>
+                    </div>
+                </i18n-tabs>
+            </div>
+        </div>
+</fieldset>
+
+<style>
+    .product-tab {
+        display: block;
+        padding: 15px;
+        border: 1px solid #ccc;
+    }
+    .product-tab .btn {
+        margin-bottom: 15px;
+    }
+</style>

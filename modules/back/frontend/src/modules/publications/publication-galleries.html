@@ -1,0 +1,75 @@
+<fieldset class="content-group">
+    <legend class="text-bold">
+        Галереи изображений
+
+        <button (click)="addGallery()" class="btn btn-xs bg-teal-400 btn-labeled btn-rounded" type="button" style="margin-left: 20px;">
+            <b><i class="icon-plus22"></i></b>
+            Добавить галерею
+        </button>
+    </legend>
+
+    <div *ngFor="let gallery of form.galleries" class="publ-gallery">
+        <button (click)="addImages(gallery)" class="btn btn-xs bg-teal-400 btn-labeled btn-rounded" type="button">
+            <b><i class="icon-plus22"></i></b>
+            Добавить изображения
+        </button>
+
+        <button (click)="deleteGallery(gallery)" class="btn btn-xs bg-warning-700 btn-labeled btn-rounded" type="button" style="margin-left: 15px;">
+            <b><i class="icon-trash"></i></b>
+            Удалить галерею
+        </button>
+
+        <my-grid [sortable]="true" [items]="gallery.images">
+            <my-thumb
+                    *ngFor="let image of gallery.images;let i=index"
+                    [imageUrl]="image.getPreviewUrl()"
+                    [attr.data-index]="i"
+                    deleteMessage="Удалить изображение?"
+                    (onUpdate)="updateImage(image)"
+                    (onDelete)="deleteImage(gallery, image)"
+            >
+            </my-thumb>
+        </my-grid>
+    </div>
+
+    <input type="file" multiple style="display: none;" (change)="fileChangeListener($event)"/>
+</fieldset>
+
+<my-modal>
+
+    <form class="form-horizontal" (submit)="saveImage()">
+
+        <form-group [form]="modalForm" attribute="image" label="Изображение">
+            <my-cropper
+                    [image]="modalForm.image"
+                    [aspectRatio]="818/545"
+            ></my-cropper>
+        </form-group>
+
+        <i18n-tabs>
+            <div *ngFor="let i18nForm of modalForm.getI18ns()">
+
+                <form-group [form]="i18nForm" [attribute]="'name'" [label]="'Название'" [horizontal]="false">
+                    <input [(ngModel)]="i18nForm.name" type="text" class="form-control" />
+                </form-group>
+
+            </div>
+        </i18n-tabs>
+
+        <form-button>Сохранить</form-button>
+
+    </form>
+
+</my-modal>
+
+<style>
+    .content-group {
+        margin-top: 40px;
+    }
+    .publ-gallery {
+        display: block;
+        border: 1px solid #ccc;
+        margin-bottom: 15px;
+        padding: 15px;
+    }
+</style>

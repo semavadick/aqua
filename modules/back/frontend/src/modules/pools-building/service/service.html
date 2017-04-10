@@ -1,0 +1,38 @@
+<form-panel
+        [form]="form"
+        [i18nTabs]="i18nTabs"
+        [title]="title"
+>
+
+    <form-group [form]="form" [attribute]="'icon'" [label]="'Иконка'">
+        <my-cropper
+                [image]="form.icon"
+                [disableCrop]="true"
+        ></my-cropper>
+    </form-group>
+
+    <form-group [form]="form" [attribute]="'image'" [label]="'Изображение'">
+        <my-cropper
+                [image]="form.image"
+        ></my-cropper>
+    </form-group>
+
+    <i18n-tabs>
+        <div *ngFor="let i18nForm of form.getI18ns()">
+
+            <form-group [form]="i18nForm" [attribute]="'title'" [label]="'Заголовок'" [horizontal]="false">
+                <input [(ngModel)]="i18nForm.title" type="text" class="form-control" />
+            </form-group>
+
+            <form-group [form]="i18nForm" [attribute]="'text'" [label]="'Текст'" [horizontal]="false">
+                <my-wysiwyg [(value)]="i18nForm.text"></my-wysiwyg>
+            </form-group>
+
+            <form-group [form]="i18nForm" [attribute]="'presentation'" [label]="'Презентация'" [horizontal]="false">
+                <file-uploader [file]="i18nForm.presentation"></file-uploader>
+            </form-group>
+
+        </div>
+    </i18n-tabs>
+
+</form-panel>

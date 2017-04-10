@@ -1,0 +1,53 @@
+.panel-heading .heading-elements {
+    display: block !important;
+}
+
+@media (max-width: 768px) {
+    i18n-tabs .nav-tabs:before {
+        content: "Язык";
+    }
+}
+
+form-group {
+    display: block;
+    position: relative;
+}
+form-group.disabled:before {
+    content: "";
+    display: block;
+    position: absolute;
+    z-index: 1000;
+    top: 0;
+    right: -10px;
+    bottom: 0;
+    left: -10px;
+    background: rgba(255, 255, 255, 0.8);
+}
+
+table.dragable td[data-column-attr="sort"] > div:before {
+    content: "\ee38";
+    cursor: pointer;
+    font-family: 'icomoon';
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 20px;
+    min-width: 1em;
+    display: inline-block;
+    text-align: center;
+    font-size: 16px;
+    vertical-align: middle;
+    position: relative;
+    top: -1px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    float:left;
+    margin-right: 15px;
+    opacity: 0.6;
+}
+
+table.dragable td[data-column-attr="sort"] > div:hover:before {
+    opacity:1;
+}

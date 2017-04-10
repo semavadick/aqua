@@ -1,0 +1,33 @@
+<div class="type-advantage">
+    <button (click)="deleteAdvantage()" class="pull-right btn text-warning-700 btn-xs btn-link" type="button">
+        <b><i class="icon-trash"></i></b>
+    </button>
+
+    <form-group [form]="form" attribute="icon" label="Иконка">
+        <my-cropper
+                [image]="form.icon"
+                [disableCrop]="true"
+        ></my-cropper>
+    </form-group>
+
+    <i18n-tabs>
+        <div *ngFor="let i18nForm of form.getI18ns()">
+
+            <form-group [form]="i18nForm" attribute="text" label="Текст" [horizontal]="false">
+                <textarea [(ngModel)]="i18nForm.text" class="form-control"></textarea>
+            </form-group>
+
+        </div>
+    </i18n-tabs>
+</div>
+
+<style>
+    .type-advantage {
+        display: block;
+        padding: 15px;
+        border: 1px solid #ccc;
+    }
+    .type-advantage .btn {
+        margin-bottom: 15px;
+    }
+</style>

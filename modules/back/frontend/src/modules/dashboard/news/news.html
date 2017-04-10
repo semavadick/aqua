@@ -1,0 +1,25 @@
+<div class="panel panel-flat">
+    <div class="panel-heading">
+        <h6 class="panel-title">Последние новости</h6>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table text-nowrap">
+            <thead>
+            <tr>
+                <th>Название</th>
+                <th>Дата</th>
+            </tr>
+            </thead>
+
+            <tbody>
+
+            <tr *ngFor="let newsItem of news" (click)="goToNewsItem(newsItem.id)" style="cursor: pointer;">
+                <td>{{ newsItem.name }}</td>
+                <td>{{ newsItem.added }}</td>
+            </tr>
+
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,61 @@
+<crud-grid
+        [manager]="manager"
+        [form]="form"
+        [i18nTabs]="i18nTabs"
+        title="Список офисов"
+        createButtonText="Добавить офис"
+        deleteMessage="Вы уверены, что хотите удалить данный офис?"
+        createFormTitle="Добавление офиса"
+        updateFormTitle="Редактирование офиса"
+>
+
+    <form-group [form]="form" [attribute]="'regionId'" [label]="'Регион'">
+        <select [ngModel]="form.regionId" (ngModelChange)="selectRegion($event)" class="form-control">
+            <option *ngFor="let region of manager.regions" [value]="region.id">
+                {{ region.name }}
+            </option>
+        </select>
+    </form-group>
+
+    <form-group [form]="form" [attribute]="'coordsLat'" [label]="'Широта'">
+        <input [(ngModel)]="form.coordsLat" type="text" class="form-control" />
+    </form-group>
+
+    <form-group [form]="form" [attribute]="'coordsLng'" [label]="'Долгота'">
+        <input [(ngModel)]="form.coordsLng" type="text" class="form-control" />
+    </form-group>
+
+    <form-group [form]="form" [attribute]="'phone'" [label]="'Телефон'">
+        <input [(ngModel)]="form.phone" type="text" class="form-control" />
+    </form-group>
+
+    <i18n-tabs>
+        <div *ngFor="let i18nForm of form.getI18ns()">
+
+            <i18n-checkbox [form]="i18nForm"></i18n-checkbox>
+
+            <form-group [form]="i18nForm" [attribute]="'name'" [label]="'Название'" [horizontal]="false">
+                <input [(ngModel)]="i18nForm.name" type="text" class="form-control" />
+            </form-group>
+            
+            <form-group [form]="i18nForm" [attribute]="'address'" [label]="'Адрес'" [horizontal]="false">
+                <input [(ngModel)]="i18nForm.address" type="text" class="form-control" />
+            </form-group>
+
+            <form-group [form]="i18nForm" [attribute]="'phoneComment'" [label]="'Комментарий под телефоном'" [horizontal]="false">
+                <input [(ngModel)]="i18nForm.phoneComment" type="text" class="form-control" />
+            </form-group>
+
+            <form-group [form]="i18nForm" [attribute]="'email'" [label]="'E-mail'" [horizontal]="false">
+                <input [(ngModel)]="i18nForm.email" type="text" class="form-control" />
+            </form-group>
+
+
+            <form-group [form]="i18nForm" [attribute]="'comment'" [label]="'Описание'" [horizontal]="false">
+                <my-wysiwyg [(value)]="i18nForm.comment"></my-wysiwyg>
+            </form-group>
+
+        </div>
+    </i18n-tabs>
+
+</crud-grid>

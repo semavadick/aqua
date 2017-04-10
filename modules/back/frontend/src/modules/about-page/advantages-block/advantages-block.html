@@ -1,0 +1,21 @@
+<form-panel
+        [form]="form"
+        [i18nTabs]="i18nTabs"
+        title="Преимущества компании"
+>
+
+    <i18n-tabs>
+        <div *ngFor="let i18nForm of form.getI18ns()">
+
+            <form-group [form]="i18nForm" [attribute]="'menuName'" [label]="'Название в меню'" [horizontal]="false">
+                <input [(ngModel)]="i18nForm.menuName" type="text" class="form-control" />
+            </form-group>
+
+            <form-group [form]="i18nForm" [attribute]="'title'" [label]="'Заголовок'" [horizontal]="false">
+                <input [(ngModel)]="i18nForm.title" type="text" class="form-control" />
+            </form-group>
+
+        </div>
+    </i18n-tabs>
+
+</form-panel>

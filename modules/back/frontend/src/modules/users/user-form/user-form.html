@@ -1,0 +1,105 @@
+<form-group [form]="form" attribute="email" label="E-mail">
+    <input [(ngModel)]="form.email" type="text" class="form-control" />
+</form-group>
+
+<form-group [form]="form" attribute="password" label="Пароль">
+    <input [(ngModel)]="form.password" type="password" class="form-control" placeholder="{{ form.isNewUser ? '' : '*********' }}" />
+
+    <div>
+        <button (click)="form.generatePassword()" type="button" class="btn btn-info" style="margin-top: 10px; vertical-align: top;">Сгенерировать пароль</button>
+        <span *ngIf="form.generatedPassword" style="display: inline-block; margin: 20px 5px 0;">{{ form.generatedPassword }}</span>
+    </div>
+</form-group>
+
+<form-group [form]="form" attribute="phone" label="Телефон">
+    <input [(ngModel)]="form.phone" type="text" class="form-control" />
+</form-group>
+
+<form-group [form]="form" attribute="fullName" label="Имя и фамилия">
+    <input [(ngModel)]="form.fullName" type="text" class="form-control" />
+</form-group>
+
+<form-group [form]="form" attribute="status" label="Статус">
+    <select [ngModel]="form.status" (ngModelChange)="form.status = $event" class="form-control">
+        <option *ngFor="let status of form.statuses" [value]="status.id">
+            {{ status.label }}
+        </option>
+    </select>
+</form-group>
+
+<form-group [form]="form" attribute="role" label="Роль">
+    <select [ngModel]="form.role" (ngModelChange)="form.role = $event" class="form-control">
+        <option *ngFor="let role of form.roles" [value]="role.id">
+            {{ role.label }}
+        </option>
+    </select>
+</form-group>
+
+<form-group [form]="form" attribute="discount" label="Общая скидка">
+    <input [(ngModel)]="form.discount" type="text" class="form-control" />
+</form-group>
+
+<categories-discount></categories-discount>
+<addition-categories-discount></addition-categories-discount>
+
+<div *ngIf="form.isClient()">
+
+    <form-group [form]="form" attribute="type" label="Тип">
+        <select [ngModel]="form.type" (ngModelChange)="form.type = $event" class="form-control">
+            <option *ngFor="let type of form.types" [value]="type.id">
+                {{ type.label }}
+            </option>
+        </select>
+    </form-group>
+
+
+    <div *ngIf="form.isCompany()">
+
+        <form-group [form]="form" attribute="companyType" label="Форма">
+            <select [ngModel]="form.companyType" (ngModelChange)="form.companyType = $event" class="form-control">
+                <option *ngFor="let type of form.companyTypes" [value]="type.id">
+                    {{ type.label }}
+                </option>
+            </select>
+        </form-group>
+
+        <form-group [form]="form" attribute="companyName" label="Название компании">
+            <input [(ngModel)]="form.companyName" type="text" class="form-control" />
+        </form-group>
+
+        <form-group [form]="form" attribute="companyINN" label="ИНН">
+            <input [(ngModel)]="form.companyINN" type="text" class="form-control" />
+        </form-group>
+
+        <form-group [form]="form" attribute="companyKPP" label="КПП">
+            <input [(ngModel)]="form.companyKPP" type="text" class="form-control" />
+        </form-group>
+
+        <form-group [form]="form" attribute="companyBank" label="Банк">
+            <input [(ngModel)]="form.companyBank" type="text" class="form-control" />
+        </form-group>
+
+        <form-group [form]="form" attribute="companyCheckingAccount" label="Расчетный счет">
+            <input [(ngModel)]="form.companyCheckingAccount" type="text" class="form-control" />
+        </form-group>
+
+        <form-group [form]="form" attribute="companyCreditAccount" label="Кредитный счет">
+            <input [(ngModel)]="form.companyCreditAccount" type="text" class="form-control" />
+        </form-group>
+
+        <form-group [form]="form" attribute="companyLegalAddress" label="Юр. адрес">
+            <input [(ngModel)]="form.companyLegalAddress" type="text" class="form-control" />
+        </form-group>
+
+        <form-group [form]="form" attribute="companyActualAddress" label="Фактический адрес">
+            <input [(ngModel)]="form.companyActualAddress" type="text" class="form-control" />
+        </form-group>
+
+        <form-group [form]="form" attribute="companyCEO" label="Ген. директор">
+            <input [(ngModel)]="form.companyCEO" type="text" class="form-control" />
+        </form-group>
+
+    </div>
+
+</div>
+

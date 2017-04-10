@@ -1,0 +1,46 @@
+<div class="row">
+    <div class="col-md-4">
+        <label class="control-label">ID</label>
+        <input class="form-control" [(ngModel)]="form.id" />
+    </div>
+
+    <div class="col-md-4">
+        <label class="control-label">Статус</label>
+        <select [ngModel]="form.status" (ngModelChange)="form.status = $event" class="form-control">
+            <option *ngFor="let status of form.statuses" [value]="status.id">
+                {{ status.label }}
+            </option>
+        </select>
+    </div>
+
+    <div class="col-md-4">
+        <label class="control-label">Клиент</label>
+        <select [ngModel]="form.clientId" (ngModelChange)="form.clientId = $event" class="form-control clients">
+            <option *ngFor="let client of form.clients" [value]="client.id">
+                {{ client.text }}
+            </option>
+        </select>
+    </div>
+</div>
+
+<style>
+    .select2-container {
+        width: auto;
+        display: block !important;
+    }
+
+    .select2-container .select2-selection {
+        height: 36px;
+        border-radius: 3px;
+        padding: 0;
+    }
+
+    .select2-container .select2-selection > span {
+        line-height: 36px !important;
+        padding-left: 15px !important;
+    }
+
+    .select2-container .select2-selection__arrow {
+        top: 4px;
+    }
+</style>

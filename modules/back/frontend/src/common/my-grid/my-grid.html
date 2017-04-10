@@ -1,0 +1,65 @@
+<div class="my-grid my-grid__{{ cols }}">
+    <div class="my-grid__inner">
+        <ng-content></ng-content>
+    </div>
+</div>
+
+<style>
+    .my-grid {
+        display: block;
+        overflow: hidden;
+    }
+    .my-grid__inner {
+        display: block;
+        font-size: 0;
+        line-height: 0;
+        letter-spacing: -1px;
+        margin-left: -30px;
+    }
+    .my-grid__inner > * {
+        display: inline-block;
+        vertical-align: top;
+        font-size: 14px;
+        line-height: normal;
+        letter-spacing: normal;
+        box-sizing: border-box;
+        max-width: 25%;
+        min-width: 200px;
+        padding: 15px 0 15px 30px;
+    }
+
+    .my-grid__inner > my-thumb {
+        padding: 0 !important;
+        margin: 15px 0 15px 30px !important;
+    }
+    .my-grid__inner .thumb {
+        text-align: center;
+    }
+
+    .my-grid__inner .thumb,
+    .my-grid__inner .gu-transit .thumb
+    {
+        cursor: move;
+    }
+
+    .my-grid__inner .thumb img {
+        width: auto;
+    }
+    .my-grid__inner .caption,
+    .my-grid__inner .caption-overflow {
+        text-align: left;
+    }
+
+    .my-grid__2 .my-grid__inner > * {
+        max-width: 50%;
+        width: 100%;
+        margin: 0;
+        padding: 15px 0 15px 30px;
+    }
+
+    body.gu-unselectable {
+        cursor: move;
+    }
+
+
+</style>

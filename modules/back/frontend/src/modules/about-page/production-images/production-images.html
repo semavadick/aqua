@@ -1,0 +1,31 @@
+<crud-grid
+        [manager]="manager"
+        [form]="form"
+        [i18nTabs]="i18nTabs"
+        title="Галерея производства"
+        createButtonText="Добавить изображение"
+        deleteMessage="Вы уверены, что хотите удалить данное изображение?"
+        createFormTitle="Добавление изображения"
+        updateFormTitle="Редактирование изображения"
+>
+
+    <form-group [form]="form" attribute="image" label="Изображение">
+        <my-cropper
+                [image]="form.image"
+                [aspectRatio]="1000/690"
+        ></my-cropper>
+    </form-group>
+
+    <i18n-tabs>
+        <div *ngFor="let i18nForm of form.getI18ns()">
+
+            <i18n-checkbox [form]="i18nForm"></i18n-checkbox>
+
+            <form-group [form]="i18nForm" attribute="text" label="Текст" [horizontal]="false">
+                <my-wysiwyg [(value)]="i18nForm.text"></my-wysiwyg>
+            </form-group>
+
+        </div>
+    </i18n-tabs>
+
+</crud-grid>

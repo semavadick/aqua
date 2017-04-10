@@ -1,0 +1,55 @@
+<div class="sidebar-content">
+
+    <!-- Main navigation -->
+    <div class="sidebar-category sidebar-category-visible">
+        <div class="category-content no-padding">
+            <ul class="navigation navigation-main navigation-accordion">
+
+                <li *ngFor="let item of items" [class.active]="item.isActive" [class.opened]="item.isOpened">
+                    <a (click)="toggleItem(item)" [class.has-ul]="item.children.length > 0">
+                        <i class="icon-{{ item.icon }}"></i>
+                        <span>{{ item.name }}</span>
+                    </a>
+
+                    <ul *ngIf="item.children.length > 0" class="child-ul">
+                        <li *ngFor="let child of item.children" [class.active]="child.isActive">
+                            <a (click)="toggleItem(child)">
+                                {{ child.name }}
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+    <!-- /main navigation -->
+
+</div>
+
+<style>
+    .child-ul {
+        display: none;
+    }
+    .opened .child-ul {
+        display: block;
+    }
+    .sidebar-xs .opened .child-ul {
+        display: none;
+    }
+    .sidebar-xs .opened .child-ul {
+        display: none;
+    }
+    .navigation li.active > .has-ul:after {
+        -webkit-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    .navigation li.opened > .has-ul:after {
+        -webkit-transform: rotate(90deg);
+        -ms-transform: rotate(90deg);
+        -o-transform: rotate(90deg);
+        transform: rotate(90deg);
+    }
+</style>

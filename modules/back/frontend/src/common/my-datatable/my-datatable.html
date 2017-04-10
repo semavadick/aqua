@@ -1,0 +1,110 @@
+<div class="panel panel-flat" style="position: relative;">
+    <panel-spinner [isVisible]="manager.isLoading"></panel-spinner>
+
+    <div class="panel-heading">
+        <h5 class="panel-title">{{ title }}</h5>
+
+        <div *ngIf="!createDisabled" class="heading-elements">
+            <button (click)="createEntity()" type="button" class="btn btn-xs bg-teal-400 btn-labeled btn-rounded">
+                <b><i class="icon-plus22"></i></b>
+                {{ createButtonText }}
+            </button>
+        </div>
+    </div>
+
+    <div *ngIf="searchForm" class="panel-body">
+        <form (submit)="search()">
+            <legend class="text-bold">Поиск</legend>
+            <ng-content select="my-datatable-search-form"></ng-content>
+
+            <div class="text-right" style="margin-top: 20px;">
+                <button class="btn btn-primary" type="submit">
+                    Найти
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <div class="dataTables_wrapper no-footer">
+
+        <div class="datatable-scroll">
+            <table *ngIf="manager.entities.length > 0" class="table datatable-save-state dataTable no-footer">
+                <thead>
+                <tr>
+                    <th
+                            *ngFor="let column of columns"
+                            class="{{ sort.getColumnClassName(column) }}"
+                            (click)="sortByColumn(column)"
+                    >
+                        {{ column.getHeaderContent(entity) }}
+                    </th>
+
+                    <th style="width: 150px;">
+
+                    </th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr *ngFor="let entity of manager.entities; let i = index" attr.data-index="{{ i }}">
+                    <td *ngFor="let column of columns" attr.data-column-attr="{{ column.attribute }}">
+                        <div *ngIf="column.rawContent" [innerHTML]="column.getCellContent(entity)"></div>
+                        <div *ngIf="!column.rawContent">
+                            {{ column.getCellContent(entity) }}
+                        </div>
+                    </td>
+
+                    <td class="text-center" style="width: 150px;">
+                        <button (click)="updateEntity(entity)" title="Редактировать" type="button" class="btn btn-xs bg-info-600 btn-icon">
+                            <i class="icon-pen"></i>
+                        </button>
+
+                        <button (click)="deleteEntity(entity)" title="Удалить" type="button" class="btn btn-xs bg-warning-700 btn-icon" style="margin-left: 10px;">
+                            <i class="icon-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div *ngIf="!manager.isLoading && manager.entities.length == 0" style="margin: 20px;">Не найдено ни одного элемента</div>
+
+        <div *ngIf="pagination.hasMoreThanOnePage()" class="datatable-footer">
+            <div class="dataTables_info">
+                Показаны записи с {{ pagination.getOffset() + 1 }} по {{ pagination.getShownOffset() }} из {{ pagination.total }}
+            </div>
+
+
+            <div class="dataTables_paginate paging_simple_numbers" id="DataTables_Table_2_paginate">
+                <a [class.disabled]="pagination.isOnFirstPage()" (click)="goToPrevPage()" class="paginate_button previous">←</a>
+                <span>
+                    <a
+                        *ngFor="let pageNumber of pagination.getPageNumbersForSelect()"
+                        [class.current]="pageNumber == pagination.currentPage"
+                        (click)="goToPage(pageNumber)"
+                        class="paginate_button"
+                    >
+                        {{ pageNumber }}
+                    </a>
+                </span>
+                <a [class.disabled]="pagination.isOnLastPage()" (click)="goToNextPage()" class="paginate_button next" aria-controls="DataTables_Table_2" data-dt-idx="3" tabindex="0" id="DataTables_Table_2_next">→</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<my-modal>
+
+    <panel-spinner [isVisible]="entityForm.isLoading"></panel-spinner>
+
+    <form class="form-horizontal" (submit)="save()">
+
+        <ng-content select="my-datatable-entity-form"></ng-content>
+
+        <form-button>Сохранить</form-button>
+
+    </form>
+
+</my-modal>

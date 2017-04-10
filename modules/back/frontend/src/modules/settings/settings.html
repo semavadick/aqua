@@ -1,0 +1,46 @@
+<page-header title="Управление настройками"></page-header>
+
+<div class="content">
+    <form-panel
+            [form]="form"
+            title="Настройки"
+    >
+
+        <form-group [form]="form" attribute="phone1" label="Телефон 1">
+            <input [(ngModel)]="form.phone1" type="text" class="form-control" />
+        </form-group>
+
+        <form-group [form]="form" attribute="phone2" label="Телефон 2">
+            <input [(ngModel)]="form.phone2" type="text" class="form-control" />
+        </form-group>
+
+        <form-group [form]="form" attribute="colnsultEmail" label="E-mail для заявки на консультацию">
+            <input [(ngModel)]="form.colnsultEmail" type="text" class="form-control" />
+        </form-group>
+
+        <form-group [form]="form" attribute="calcEmail" label="E-mail для заявки на просчет бассейна">
+            <input [(ngModel)]="form.calcEmail" type="text" class="form-control" />
+        </form-group>
+
+        <form-group [form]="form" attribute="feedbackEmail" label="E-mail для запроса обратной связи">
+            <input [(ngModel)]="form.feedbackEmail" type="text" class="form-control" />
+        </form-group>
+
+        <form-group [form]="form" attribute="facebookLink" label="Ссылка на facebook">
+            <input [(ngModel)]="form.facebookLink" type="text" class="form-control" />
+        </form-group>
+
+        <form-group [form]="form" attribute="twitterLink" label="Ссылка на instagram">
+            <input [(ngModel)]="form.twitterLink" type="text" class="form-control" />
+        </form-group>
+
+        <form-group [form]="form" attribute="youtubeLink" label="Ссылка на youtube">
+            <input [(ngModel)]="form.youtubeLink" type="text" class="form-control" />
+        </form-group>
+
+        <form-group [form]="form" attribute="countersCode" label="Код счетчиков">
+            <textarea [(ngModel)]="form.countersCode" class="form-control"></textarea>
+        </form-group>
+
+    </form-panel>
+</div>

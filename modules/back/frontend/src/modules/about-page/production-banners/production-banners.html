@@ -1,0 +1,34 @@
+<crud-grid
+        [manager]="manager"
+        [form]="form"
+        [i18nTabs]="i18nTabs"
+        title="Баннеры производства"
+        createButtonText="Добавить баннер"
+        deleteMessage="Вы уверены, что хотите удалить данный баннер?"
+        createFormTitle="Добавление баннера"
+        updateFormTitle="Редактирование банера"
+>
+
+    <form-group [form]="form" attribute="image" label="Изображение">
+        <my-cropper
+                [image]="form.image"
+        ></my-cropper>
+    </form-group>
+
+    <i18n-tabs>
+        <div *ngFor="let i18nForm of form.getI18ns()">
+
+            <i18n-checkbox [form]="i18nForm"></i18n-checkbox>
+
+            <form-group [form]="i18nForm" attribute="text" label="Текст" [horizontal]="false">
+                <my-wysiwyg [(value)]="i18nForm.text"></my-wysiwyg>
+            </form-group>
+
+            <form-group [form]="i18nForm" attribute="link" label="Ссылка" [horizontal]="false">
+                <input [(ngModel)]="i18nForm.link" type="text" class="form-control" />
+            </form-group>
+
+        </div>
+    </i18n-tabs>
+
+</crud-grid>

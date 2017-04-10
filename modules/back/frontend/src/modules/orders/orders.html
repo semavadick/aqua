@@ -1,0 +1,28 @@
+<page-header title="Управление заказами"></page-header>
+
+<div class="content">
+
+    <my-datatable
+            [manager]="manager"
+            [columns]="columns"
+            [searchForm]="searchForm"
+            [entityForm]="orderForm"
+            defaultSortAttribute="added"
+            title="Список заказов"
+            [createDisabled]="true"
+            deleteMessage="Уверены, что хотите удалить данный заказ?"
+            createFormTitle="Добавление заказа"
+            updateFormTitle="Редактирование заказа"
+    >
+
+        <my-datatable-search-form>
+            <search-form [form]="searchForm"></search-form>
+        </my-datatable-search-form>
+
+        <my-datatable-entity-form>
+            <order-form [form]="orderForm"></order-form>
+        </my-datatable-entity-form>
+
+    </my-datatable>
+
+</div>

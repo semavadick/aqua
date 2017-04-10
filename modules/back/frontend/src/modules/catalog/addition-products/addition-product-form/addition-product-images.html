@@ -1,0 +1,41 @@
+<fieldset class="content-group" style="margin-top: 40px">
+ <legend class="text-bold">
+  Изображения
+
+  <button (click)="addImages()" class="btn btn-xs bg-teal-400 btn-labeled btn-rounded" type="button" style="margin-left: 15px;">
+   <b><i class="icon-plus22"></i></b>
+   Добавить изображения
+  </button>
+ </legend>
+
+ <my-grid [sortable]="true" [items]="images">
+  <my-thumb
+          *ngFor="let image of images;let i=index"
+          [imageUrl]="image.getPreviewUrl()"
+          [attr.data-index]="i"
+          deleteMessage="Удалить изображение?"
+          (onUpdate)="updateImage(image)"
+          (onDelete)="deleteImage(image)"
+  >
+  </my-thumb>
+ </my-grid>
+
+ <input type="file" multiple style="display: none;" (change)="fileChangeListener($event)"/>
+</fieldset>
+
+<my-modal>
+
+ <form class="form-horizontal" (submit)="saveImage()">
+
+  <form-group [form]="modalForm" attribute="image" label="Изображение">
+   <my-cropper
+           [image]="modalForm.image"
+           [aspectRatio]="798/502"
+   ></my-cropper>
+  </form-group>
+
+  <form-button>Сохранить</form-button>
+
+ </form>
+
+</my-modal>

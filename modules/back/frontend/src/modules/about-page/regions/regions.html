@@ -1,0 +1,23 @@
+<crud-grid
+        [manager]="manager"
+        [form]="form"
+        [i18nTabs]="i18nTabs"
+        title="Список регионов офисов"
+        createButtonText="Добавить регион"
+        deleteMessage="Вы уверены, что хотите удалить данный регион?"
+        createFormTitle="Добавление региона"
+        updateFormTitle="Редактирование региона"
+>
+    <i18n-tabs>
+        <div *ngFor="let i18nForm of form.getI18ns()">
+
+            <i18n-checkbox [form]="i18nForm"></i18n-checkbox>
+
+            <form-group [form]="i18nForm" [attribute]="'name'" [label]="'Название'" [horizontal]="false">
+                <input [(ngModel)]="i18nForm.name" type="text" class="form-control" />
+            </form-group>
+
+        </div>
+    </i18n-tabs>
+
+</crud-grid>

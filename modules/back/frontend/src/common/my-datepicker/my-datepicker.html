@@ -1,0 +1,9 @@
+<div class="input-group">
+    <span class="input-group-addon"><i class="icon-calendar22"></i></span>
+    <input type="text" class="form-control publication-added-date" [ngModel]="date" (ngModelChange)="dateChange.emit({value:$event})">
+</div>
+<style>
+    .picker {
+        z-index: 99999 !important;
+    }
+</style>

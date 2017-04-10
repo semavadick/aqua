@@ -1,0 +1,31 @@
+<h6 *ngIf="hasGeneralError()" class="text-danger">
+    {{ getGeneralError() }}
+</h6>
+
+<div class="tabbable nav-tabs-vertical nav-tabs-left">
+    <ul class="nav nav-tabs nav-tabs-highlight">
+        <li *ngFor="let form of forms" [class.active]="isFormSelected(form)">
+            <a (click)="selectForm(form)" [class.text-danger]="form.hasErrors()">
+                <img alt="{{ form.language.name }}" src="lts/images/{{ form.language.id }}.png">
+
+                <i class="icon-notification2" *ngIf="form.hasErrors()"></i>
+            </a>
+        </li>
+    </ul>
+
+    <div class="tab-content">
+        <ng-content></ng-content>
+    </div>
+</div>
+
+<style>
+    .nav-tabs-vertical .nav-tabs {
+        width: 50px;
+    }
+    .nav-tabs-vertical .nav-tabs i {
+        margin-left: 5px;
+    }
+    .nav-tabs-vertical .tab-content {
+        padding: 0 10px 0 30px;
+    }
+</style>

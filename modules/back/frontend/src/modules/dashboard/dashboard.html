@@ -1,0 +1,37 @@
+<page-header title="Панель управления"></page-header>
+
+<div class="content">
+
+    <div class="row">
+
+        <div *ngIf="wUser.canManageOrders" class="col-md-6">
+            <dashboard-orders
+                    [totalOrdersCount]="totalOrdersCount"
+                    [preProcessingOrdersCount]="preProcessingOrdersCount"
+                    [processingOrdersCount]="processingOrdersCount"
+            ></dashboard-orders>
+        </div>
+
+        <div *ngIf="wUser.canManageOrders" class="col-md-6">
+            <dashboard-orders-sum
+                    [ordersWeeklySum]="ordersWeeklySum"
+                    [ordersMonthlySum]="ordersMonthlySum"
+                    [ordersTotalSum]="ordersTotalSum"
+            ></dashboard-orders-sum>
+        </div>
+
+    </div>
+
+    <div *ngIf="wUser.canManageUsers">
+        <dashboard-registrations [users]="users"></dashboard-registrations>
+    </div>
+
+    <div *ngIf="wUser.canManageNews">
+        <dashboard-news [news]="news"></dashboard-news>
+    </div>
+
+    <div *ngIf="wUser.canManageArticles">
+        <dashboard-articles [articles]="articles"></dashboard-articles>
+    </div>
+
+</div>

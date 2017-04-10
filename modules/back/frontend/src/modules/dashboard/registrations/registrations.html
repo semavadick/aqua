@@ -1,0 +1,27 @@
+<div class="panel panel-flat">
+    <div class="panel-heading">
+        <h6 class="panel-title">Регистрации</h6>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table text-nowrap">
+            <thead>
+            <tr>
+                <th>Имя и фамилия</th>
+                <th>Телфон</th>
+                <th>Кол-во заказов</th>
+            </tr>
+            </thead>
+
+            <tbody>
+
+            <tr *ngFor="let user of users" (click)="goToUser(user.id)" style="cursor: pointer;">
+                <td>{{ user.fullName }}</td>
+                <td>{{ user.phone }}</td>
+                <td>{{ user.ordersCount }}</td>
+            </tr>
+
+            </tbody>
+        </table>
+    </div>
+</div>

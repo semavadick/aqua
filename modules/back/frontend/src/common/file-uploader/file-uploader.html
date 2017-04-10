@@ -1,0 +1,35 @@
+<div class="uploader">
+    <span *ngIf="deleteAllowed" (click)="deleteFile()" class="action btn btn-danger" style="-webkit-user-select: none;">
+        Очистить
+    </span>
+
+    <span class="filename" style="-webkit-user-select: none;">
+        {{ file.getName() }}
+    </span>
+
+    <span (click)="chooseFile($event)" class="action btn bg-teal-400" style="-webkit-user-select: none;">
+        Выбрать файл
+    </span>
+
+    <input (change)="fileChangeListener($event)" type="file" class="file-styled">
+</div>
+
+<style>
+    .uploader input[type=file] {
+        display: none !important;
+    }
+    .uploader .action.btn-danger {
+        border-radius: 0;
+        border-bottom-left-radius: 3px;
+        border-top-left-radius: 3px;
+    }
+    .uploader .action.btn-danger + .filename {
+        border-radius: 0 !important;
+    }
+    .has-error .uploader .filename {
+        border-color: #D84315;
+    }
+    .has-error .uploader .action {
+        border-left-color: #D84315;
+    }
+</style>

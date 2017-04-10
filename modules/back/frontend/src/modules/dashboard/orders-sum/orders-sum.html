@@ -1,0 +1,39 @@
+<div class="panel panel-flat">
+    <div class="panel-heading">
+        <h6 class="panel-title">Суммы заказов</h6>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row text-center">
+            <div class="col-md-4">
+                <div class="content-group">
+                    <h5 class="text-semibold no-margin">
+                        <i class="icon-calendar5 position-left text-slate"></i>
+                        {{ ordersWeeklySum }} руб.
+                    </h5>
+                    <span class="text-muted text-size-small">за неделю</span>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="content-group">
+                    <h5 class="text-semibold no-margin">
+                        <i class="icon-calendar52 position-left text-slate"></i>
+                        {{ ordersMonthlySum }} руб.
+                    </h5>
+                    <span class="text-muted text-size-small">за месяц</span>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="content-group">
+                    <h5 class="text-semibold no-margin">
+                        <i class="icon-cash3 position-left text-slate"></i>
+                        {{ ordersTotalSum }} руб.
+                    </h5>
+                    <span class="text-muted text-size-small">всего</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

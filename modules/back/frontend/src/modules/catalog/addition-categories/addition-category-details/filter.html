@@ -1,0 +1,27 @@
+<div class="category-filter">
+    <button (click)="deleteFilter()" class="btn btn-xs bg-warning-700 btn-labeled btn-rounded" type="button">
+        <b><i class="icon-trash"></i></b>
+        Удалить фильтр
+    </button>
+
+    <i18n-tabs>
+        <div *ngFor="let i18nForm of form.getI18ns()">
+
+            <form-group [form]="i18nForm" attribute="text" label="Текст" [horizontal]="false">
+                <input [(ngModel)]="i18nForm.text" type="text" class="form-control" />
+            </form-group>
+
+        </div>
+    </i18n-tabs>
+</div>
+
+<style>
+    .category-filter {
+        display: block;
+        padding: 15px;
+        border: 1px solid #ccc;
+    }
+    .category-filter .btn {
+        margin-bottom: 15px;
+    }
+</style>

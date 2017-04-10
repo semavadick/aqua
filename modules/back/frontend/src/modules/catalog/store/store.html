@@ -1,0 +1,11 @@
+<div class="row">
+    <div class="col-md-3">
+        <catalog-categories (onSelect)="selectCategory($event)"></catalog-categories>
+        <addition-catalog-categories (onSelect)="selectAdditionCategory($event)"></addition-catalog-categories>
+    </div>
+
+    <div class="col-md-9">
+        <catalog-products></catalog-products>
+        <addition-catalog-products style="display: none"></addition-catalog-products>
+    </div>
+</div>

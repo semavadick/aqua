@@ -1,0 +1,110 @@
+ul.jstree-children {
+    list-style: none;
+    margin: 0;
+}
+ul.jstree-container-ul {
+    padding: 0;
+}
+.jstree-themeicon-hidden {
+    display: none;
+}
+.jstree-anchor {
+    display: block;
+    position: relative;
+    cursor: default;
+    border-radius: 2px;
+    padding: 0 2px;
+    white-space: nowrap;
+    max-width: 100%;
+    text-overflow: ellipsis;
+}
+.jstree-anchor,
+.jstree-anchor:hover,
+.jstree-anchor:focus {
+    color: #333333;
+}
+.with-controls .jstree-anchor:hover {
+    background: #eee;
+}
+.leaf-name {
+    cursor: pointer;
+    display: inline-block;
+    padding: 4px 6px;
+    border-radius: 2px;
+    margin: 0 1px;
+}
+.leaf.active > .leaf-name {
+    background-color: #2196F3;
+    color: #fff;
+}
+.jstree-open > .jstree-anchor > .leaf > .icon-folder-plus::before {
+    content: "\ea43";
+}
+.jstree-leaf > .jstree-anchor > .leaf > .icon-folder-plus::before {
+    content: "\ea3d";
+}
+
+
+.leaf-controls {
+    display: none;
+    position: absolute;
+    top: 4px;
+    right: 2px;
+}
+.jstree-anchor:hover .leaf-controls {
+    display: block;
+}
+.leaf-controls button {
+    padding: 2px 1px 1px;
+    font-size: 8px;
+    margin-left: 4px;
+}
+
+.jstree-anchor .jstree-icon {
+    cursor: pointer;
+    display: block;
+    float: left;
+    font-family: 'icomoon';
+    font-style: normal;
+    margin-right: 7px;
+    font-size: 16px;
+    margin-top: 2px;
+}
+.jstree-leaf .jstree-icon {
+    visibility: hidden;
+}
+.jstree-anchor .jstree-icon::before {
+    content: '\e9c7';
+}
+.jstree-open > .jstree-anchor > .jstree-icon::before {
+    content: '\e9c5';
+}
+
+
+
+#jstree-marker {
+    position: absolute;
+    z-index: 2;
+}
+#jstree-marker:after {
+    content: "";
+    display: block;
+    width: 0;
+    height: 0;
+    margin-top: -25px;
+    border: 5px solid transparent;
+    border-right-width: 0;
+    border-left: 7px solid #404040;
+}
+.editable-container.popover {
+    z-index: 66000;
+}
+.editable-container.popover .glyphicon {
+    font-size: 12px;
+}
+.tree a.editable-click {
+    color: #1E88E5;
+}
+.tree a.editable-click:hover {
+    color: #166dba;
+}

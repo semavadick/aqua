@@ -1,0 +1,36 @@
+<div class="service-type">
+
+
+    <div class="row">
+      <div class="col-md-8">
+        Тип изделия
+      </div>
+      <div class="col-md-4">
+        <button (click)="deleteType()" class="pull-right btn text-warning-700 btn-xs btn-link" type="button">
+            <b><i class="icon-trash"></i></b>
+        </button>
+      </div>
+    </div>
+    <form-group [form]="form" attribute="image" label="Изображение">
+        <my-cropper [image]="form.image" [disableCrop]="true" [aspectRatio]="200/153"></my-cropper>
+    </form-group>
+
+    <i18n-tabs>
+        <div *ngFor="let i18nForm of form.getI18ns()">
+            <form-group [form]="i18nForm" attribute="text" label="Название" [horizontal]="false">
+                <input [(ngModel)]="i18nForm.text" type="text" class="form-control" />
+            </form-group>
+        </div>
+    </i18n-tabs>
+</div>
+
+<style>
+    .service-type {
+        display: block;
+        padding: 15px;
+        border: 1px solid #ccc;
+    }
+    .service-type .btn {
+        margin-bottom: 15px;
+    }
+</style>

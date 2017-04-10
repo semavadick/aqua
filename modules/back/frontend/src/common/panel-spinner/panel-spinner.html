@@ -1,0 +1,29 @@
+<div class="panel-spinner" [class.panel-spinner--visible]="isVisible">
+    <i class="icon-spinner3 spinner"></i>
+</div>
+
+<style>
+    .panel-spinner {
+        display: flex;
+        background: rgba(255, 255, 255, 0.8);
+        position: absolute;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+
+        visibility: hidden;
+        opacity: 0;
+        transition: all 0.3s;
+    }
+    .panel-spinner--visible {
+        visibility: visible;
+        opacity: 1;
+    }
+    .panel-spinner i {
+        font-size: 40px;
+    }
+</style>

@@ -1,0 +1,58 @@
+<div class="image-cropper">
+
+    <div
+            *ngIf="image.currentImageUrl || image.uploadedImage"
+            [class.bg-grey-300]="grayBg"
+            class="image-cropper__preview__cont"
+    >
+        <img *ngIf="image.currentImageUrl && !showCropper" src="{{ image.currentImageUrl }}" class="image-cropper__preview" />
+    </div>
+
+
+    <div class="cropper-cont" [class.hidden]="!showCropper">
+        <img src="" />
+    </div>
+
+    <div>
+        <button class="btn btn-primary btn-xs image-cropper__btn" type="button" (click)="chooseFile($event)">Выбрать изображение</button>
+        <input type="file" (change)="fileChangeListener($event)" class="image-cropper__file" />
+    </div>
+</div>
+
+<style>
+    .image-cropper__preview {
+        display: inline-block;
+        max-width: 100%;
+        max-height: 300px;
+    }
+    .image-cropper__preview__cont {
+        display: inline-block;
+        max-width: 100%;
+        max-height: 310px;
+        padding: 5px;
+        border-radius: 5px;
+        box-sizing: border-box;
+    }
+    .image-cropper__file {
+        display: none !important;
+    }
+    .image-cropper__btn {
+        margin-top: 10px;
+    }
+    .cropper-cont img {
+        max-width: 100%;
+        max-height: 500px;
+    }
+    .cropper-cont.hidden {
+        display: none !important;
+    }
+    .cropper-cont .cropper-canvas {
+        cursor: default;
+        background-color: transparent;
+        opacity: 1;
+        filter: none;
+    }
+
+
+
+</style>

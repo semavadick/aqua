@@ -1,0 +1,35 @@
+<crud-grid
+        [manager]="manager"
+        [form]="form"
+        [i18nTabs]="i18nTabs"
+        title="Этапы истории"
+        createButtonText="Добавить этап"
+        deleteMessage="Вы уверены, что хотите удалить данный этап?"
+        createFormTitle="Добавление этапа"
+        updateFormTitle="Редактирование этапа"
+>
+    
+    <form-group [form]="form" attribute="image" label="Изображение">
+        <my-cropper
+                [image]="form.image"
+                [aspectRatio]="289/179"
+        ></my-cropper>
+    </form-group>
+
+    <form-group [form]="form" attribute="year" label="Год">
+        <input [(ngModel)]="form.year" type="text" class="form-control" />
+    </form-group>
+    
+    <i18n-tabs>
+        <div *ngFor="let i18nForm of form.getI18ns()">
+
+            <i18n-checkbox [form]="i18nForm"></i18n-checkbox>
+
+            <form-group [form]="i18nForm" attribute="text" label="Текст" [horizontal]="false">
+                <my-wysiwyg [(value)]="i18nForm.text"></my-wysiwyg>
+            </form-group>
+
+        </div>
+    </i18n-tabs>
+
+</crud-grid>

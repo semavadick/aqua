@@ -1,0 +1,22 @@
+<div class="panel panel-white" style="position: relative;">
+    <panel-spinner [isVisible]="form.isLoading"></panel-spinner>
+
+    <div class="panel-heading">
+        <h5 class="panel-title">{{ title }}</h5>
+    </div>
+
+    <div class="panel-body">
+
+        <p *ngIf="showSuccessMessage" class="content-group-lg text-success">
+            Данные успешно сохранены
+        </p>
+
+        <form class="form-horizontal" (submit)="save()">
+
+            <ng-content></ng-content>
+
+            <form-button>Сохранить</form-button>
+
+        </form>
+    </div>
+</div>

@@ -1,0 +1,52 @@
+<form-panel
+        [form]="form"
+        [i18nTabs]="i18nTabs"
+        [title]="title"
+>
+
+    <form-group *ngIf="form.hasBg()" [form]="form" attribute="bg" label="Фоновое изображение">
+        <my-cropper
+                [image]="form.bg"
+                [aspectRatio]="1620/1079"
+        ></my-cropper>
+    </form-group>
+
+    <pools-building-static-galleries [form]="form"></pools-building-static-galleries>
+
+    <i18n-tabs>
+        <div *ngFor="let i18nForm of form.getI18ns()">
+
+            <i18n-checkbox [form]="i18nForm"></i18n-checkbox>
+
+            <form-group [form]="i18nForm" [attribute]="'name'" [label]="'Название'" [horizontal]="false">
+                <input [(ngModel)]="i18nForm.name" type="text" class="form-control" />
+            </form-group>
+
+            <form-group [form]="i18nForm" [attribute]="'shortDescription'" [label]="'Краткое описание'" [horizontal]="false">
+                <textarea [(ngModel)]="i18nForm.shortDescription" class="form-control"></textarea>
+            </form-group>
+
+            <form-group [form]="i18nForm" attribute="description" label="Описание" [horizontal]="false">
+                <my-wysiwyg [(value)]="i18nForm.description" [withGalleries]="true" [withIncuts]="true"></my-wysiwyg>
+            </form-group>
+
+            <!--<form-group [form]="i18nForm" [attribute]="'slug'" [label]="'ЧПУ'" [horizontal]="false">
+                <input [(ngModel)]="i18nForm.slug" type="text" class="form-control" />
+            </form-group>-->
+
+            <form-group [form]="i18nForm" [attribute]="'pageTitle'" [label]="'Title страницы'" [horizontal]="false">
+                <input [(ngModel)]="i18nForm.pageTitle" type="text" class="form-control" />
+            </form-group>
+
+            <form-group [form]="i18nForm" [attribute]="'pageMetaKeywords'" [label]="'Meta-keywords страницы'" [horizontal]="false">
+                <input [(ngModel)]="i18nForm.pageMetaKeywords" type="text" class="form-control" />
+            </form-group>
+
+            <form-group [form]="i18nForm" [attribute]="'pageMetaDescription'" [label]="'Meta-description страницы'" [horizontal]="false">
+                <textarea [(ngModel)]="i18nForm.pageMetaDescription" class="form-control"></textarea>
+            </form-group>
+
+        </div>
+    </i18n-tabs>
+
+</form-panel>

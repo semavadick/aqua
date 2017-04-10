@@ -1,0 +1,117 @@
+<page-header [title]="'Управление статьями'"></page-header>
+
+<div class="content">
+
+    <my-datatable
+            [manager]="manager"
+            [columns]="columns"
+            [entityForm]="form"
+            [searchForm]="searchForm"
+            (formInitialize)="formInitialized()"
+            defaultSortAttribute="added"
+            title="Список статей"
+            createButtonText="Добавить статью"
+            deleteMessage="Уверены, что хотите удалить данную статью?"
+            createFormTitle="Добавление статьи"
+            updateFormTitle="Редактирование статьи"
+    >
+
+        <my-datatable-search-form>
+            <div class="row">
+                <div class="col-md-3">
+                    <label class="control-label">ID</label>
+                    <input class="form-control" [(ngModel)]="searchForm.id" />
+                </div>
+
+                <div class="col-md-3">
+                    <label class="control-label">Название</label>
+                    <input class="form-control" [(ngModel)]="searchForm.name" />
+                </div>
+            </div>
+        </my-datatable-search-form>
+
+        <my-datatable-entity-form>
+
+            <form-group [form]="form" attribute="preview" label="Превью">
+                <my-cropper
+                        [image]="form.preview"
+                        [aspectRatio]="297/214"
+                ></my-cropper>
+            </form-group>
+
+            <form-group [form]="form" attribute="bg" label="Фоновое изображение">
+                <my-cropper
+                        [image]="form.bg"
+                        [aspectRatio]="2000/1400"
+                ></my-cropper>
+            </form-group>
+
+            <publication-galleries [form]="form"></publication-galleries>
+
+            <form-group [form]="form" attribute="categoriesIds" label="Категории">
+                <categories-tree (onSelect)="selectCategories($event)"></categories-tree>
+            </form-group>
+
+
+            <categories-tree
+                    [selectOnlyOneCategory]="true"
+                    [enableControls]="true"
+                    (onSelect)="selectCategories($event)"
+                    (onCreate)="createCategory($event)"
+                    (onUpdate)="updateCategory($event)"
+                    (onDelete)="deleteCategory($event)"
+                    [enableSorting]="true"
+                    (onSort)="sortCategories($event)"
+            >
+            </categories-tree>
+
+            <form-group [form]="form" attribute="addedDate" label="Дата создания статьи">
+                <div class="col-md-4">
+                    <my-datepicker [(date)]="form.addedDate" (dateChange)="changeAddedDate($event);"></my-datepicker>
+                </div>
+            </form-group>
+
+            <form-group [form]="form" attribute="active" [horizontal]="false">
+                <my-checkbox label="Опубликовано" [(value)]="form.active"></my-checkbox>
+            </form-group>
+
+            <i18n-tabs>
+                <div *ngFor="let i18nForm of form.getI18ns()">
+
+                    <i18n-checkbox [form]="i18nForm"></i18n-checkbox>
+
+                    <form-group [form]="i18nForm" [attribute]="'name'" [label]="'Название'" [horizontal]="false">
+                        <input [(ngModel)]="i18nForm.name" type="text" class="form-control" />
+                    </form-group>
+
+                    <form-group [form]="i18nForm" [attribute]="'shortDescription'" [label]="'Краткое описание'" [horizontal]="false">
+                        <textarea [(ngModel)]="i18nForm.shortDescription" class="form-control"></textarea>
+                    </form-group>
+
+                    <form-group [form]="i18nForm" attribute="description" label="Описание" [horizontal]="false">
+                        <my-wysiwyg [(value)]="i18nForm.description" [withGalleries]="true" [withIncuts]="true"></my-wysiwyg>
+                    </form-group>
+
+                    <!--<form-group [form]="i18nForm" [attribute]="'slug'" [label]="'ЧПУ'" [horizontal]="false">
+                        <input [(ngModel)]="i18nForm.slug" type="text" class="form-control" />
+                    </form-group>-->
+
+                    <form-group [form]="i18nForm" [attribute]="'pageTitle'" [label]="'Title страницы'" [horizontal]="false">
+                        <input [(ngModel)]="i18nForm.pageTitle" type="text" class="form-control" />
+                    </form-group>
+
+                    <form-group [form]="i18nForm" [attribute]="'pageMetaKeywords'" [label]="'Meta-keywords страницы'" [horizontal]="false">
+                        <input [(ngModel)]="i18nForm.pageMetaKeywords" type="text" class="form-control" />
+                    </form-group>
+
+                    <form-group [form]="i18nForm" [attribute]="'pageMetaDescription'" [label]="'Meta-description страницы'" [horizontal]="false">
+                        <textarea [(ngModel)]="i18nForm.pageMetaDescription" class="form-control"></textarea>
+                    </form-group>
+
+                </div>
+            </i18n-tabs>
+
+        </my-datatable-entity-form>
+    </my-datatable>
+
+</div>
